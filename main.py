@@ -36,12 +36,10 @@ def get_initial_context():
 
 def get_response(messages):
     try:
-        # Añade el contexto al inicio de los mensajes
-        context_message = {"role": "system", "content": messages}
         # Envía la conversación al modelo GPT-3.5 Turbo
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
-            messages=[context_message] + messages,
+            messages=messages,
             max_tokens=150,
             temperature=0.7
         )
@@ -50,7 +48,7 @@ def get_response(messages):
         return f"Ocurrió un error: {e}"
 
 def chat():
-    print("Hola, soy el asistente de Makers Tech. ¿En qué puedo ayudarte hoy? Escribe 'exit' para salir.")
+    print("Hi, I'm the Makers Tech assistant. How can I help you today? Type 'exit' to exit.")
     
     
     messages = [{"role": "system", "content": get_initial_context()}]
